@@ -28,7 +28,7 @@ function startQuiz() {
         return;
     }
 
-    const storageKey = "flagship_vFinal_Pro_Locked_" + rawInput; 
+    const storageKey = "flagship_vFinal_CenterFix_" + rawInput; 
     if (localStorage.getItem(storageKey)) {
         inputField.classList.add("input-error");
         errorMsg.innerText = `ERROR: @${rawInput} ALREADY MINTED.`;
@@ -86,7 +86,7 @@ async function triggerSlotMachine() {
         slotText.innerText = winner;
         slotText.style.color = agents[winner].color;
         
-        localStorage.setItem("flagship_vFinal_Pro_Locked_" + userHandle, "true");
+        localStorage.setItem("flagship_vFinal_CenterFix_" + userHandle, "true");
         setTimeout(() => renderCard(winner, globalId), 800);
     }, 2500);
 }
@@ -118,23 +118,13 @@ function renderCard(agentKey, id) {
 function downloadCard() {
     const card = document.getElementById("final-card");
     const el = document.getElementById("capture-area");
-    
-    // Switch to clean shape mode before capture
     card.classList.add("download-mode");
 
-    html2canvas(el, { 
-        backgroundColor: null, 
-        scale: 3, 
-        useCORS: true,
-        scrollX: 0,
-        scrollY: -window.scrollY
-    }).then(canvas => {
+    html2canvas(el, { backgroundColor: null, scale: 3, useCORS: true }).then(canvas => {
         const a = document.createElement("a");
         a.download = `Flagship_Agent_${userHandle}.png`;
         a.href = canvas.toDataURL("image/png");
         a.click();
-        
-        // Return to cool browser UI mode
         card.classList.remove("download-mode");
     });
 }
