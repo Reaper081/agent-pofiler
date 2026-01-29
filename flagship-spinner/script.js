@@ -166,7 +166,7 @@ function shareToX() {
     const serial = document.getElementById("card-id").innerText;
     
     // Lore-heavy unique caption
-    const tweetText = `IDENTITY VERIFIED: [${agent}] STRATEGIST.\n\nPriority Access granted.\n\nSerial ${serial} is now active on the network.The fleet is growing. 🚩\n\nAre you in the system?\nGet yours here now: https://flagship-fyi-agent-profiler.vercel.app/\n\n@FlagshipFYI #Flagship #Base #Onchain`;
+    const tweetText = `IDENTITY VERIFIED: [${agent}] STRATEGIST.\n\nPriority Access granted.\n\nSerial ${serial} is now active on the network.The fleet is growing. 🚩\n\nAre you in the system?\n\nGet yours here now: https://flagship-fyi-agent-profiler.vercel.app/\n\n@FlagshipFYI #Flagship #Base #Onchain`;
     
     // Encode for URL
     const encodedText = encodeURIComponent(tweetText);
