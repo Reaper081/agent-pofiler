@@ -78,7 +78,22 @@ async function triggerSlotMachine() {
         slotText.innerText = agentNames[Math.floor(Math.random() * agentNames.length)];
     }, 50);
 
-    let globalId = Math.floor(Math.random() * 8888 + 1111).toString();
+    // --- RESET GLOBAL SERIAL LOGIC ---
+    let globalId = "0002"; 
+    
+    try {
+        // 1. Using fresh key 'flagship_final_v2' to bypass your previous 46 tests
+        const response = await fetch('https://api.counterapi.dev/v1/flagship_final_v2/mints/up');
+        const data = await response.json();
+        
+        if (data && data.count) {
+            // 2. Adding 1 so the very first live user gets #0002
+            let startingNumber = data.count + 1;
+            globalId = startingNumber.toString().padStart(4, '0');
+        }
+    } catch (err) {
+        globalId = "0002";
+    }
 
     setTimeout(() => {
         clearInterval(spinInterval);
@@ -113,6 +128,9 @@ function renderCard(agentKey, id) {
     const card = document.getElementById("final-card");
     card.style.borderColor = data.color;
     document.querySelector(".brand-tag").style.color = data.color;
+
+    // SCROLL TO TOP FOR MOBILE UX
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function downloadCard() {
@@ -136,4 +154,24 @@ function showView(id) {
 
 function restartSystem() {
     location.reload();
+}
+
+/**
+ * NEW: SHARE TO X FUNCTION
+ * Handles the lore-based caption and opens X Intent URL
+ */
+function shareToX() {
+    // Grab current card data
+    const agent = document.getElementById("card-agent-name").innerText;
+    const serial = document.getElementById("card-id").innerText;
+    
+    // Lore-heavy unique caption
+    const tweetText = `IDENTITY VERIFIED: [${agent}] STRATEGIST.\n\nPriority Access granted.\n\nSerial ${serial} is now active on the network.\n\nThe fleet is growing. 🚩\n\nAre you in the system?\nGet yours here now: https://flagship-fyi-agent-profiler.vercel.app/\n\n@FlagshipFYI #Flagship #Base #Onchain`;
+    
+    // Encode for URL
+    const encodedText = encodeURIComponent(tweetText);
+    
+    // Launch X
+    const shareUrl = `https://x.com/intent/tweet?text=${encodedText}`;
+    window.open(shareUrl, '_blank');
 }
