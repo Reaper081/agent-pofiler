@@ -5,18 +5,48 @@
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
-    margin: 0; background: var(--bg); color: white; font-family: 'Rajdhani', sans-serif;
-    display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden;
+    margin: 0; 
+    background: var(--bg); 
+    color: white; 
+    font-family: 'Rajdhani', sans-serif;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+    /* Allows scrolling but hides horizontal bars */
+    overflow-x: hidden; 
+    overflow-y: auto; 
 }
 
 .app-shell { 
-    width: 100%; max-width: 420px; min-height: 100vh; padding: 20px; 
-    display: flex; flex-direction: column; align-items: center; justify-content: center; 
+    width: 100%; 
+    max-width: 420px; 
+    min-height: 100vh; 
+    padding: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    /* PC DEFAULT: Keep it centered */
+    justify-content: center; 
+}
+
+/* MOBILE FIX: When screen height is small or it's a phone, align to top */
+@media (max-width: 480px), (max-height: 700px) {
+    .app-shell {
+        justify-content: flex-start; 
+        padding-top: 40px;
+        padding-bottom: 80px; 
+    }
 }
 
 .view { 
-    width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; 
-    animation: fadeUp 0.4s ease; text-align: center;
+    width: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    animation: fadeUp 0.4s ease; 
+    text-align: center;
 }
 .hidden { display: none !important; }
 
@@ -32,12 +62,11 @@ input {
     font-size: 1.1rem; text-align: center; font-family: 'Orbitron'; margin-bottom: 20px; border-radius: 4px;
 }
 
-/* QUIZ BOXES - ADDED FIXED HEIGHT & FLEX TO PREVENT JUMPING */
+/* QUIZ BOXES */
 .q-grid { width: 100%; display: grid; gap: 12px; margin-top: 20px; }
 .opt-btn {
     background: rgba(255,255,255,0.03); border: 1px solid #333; padding: 18px; border-radius: 8px;
     cursor: pointer; font-family: 'Orbitron'; font-size: 0.85rem; text-align: left; transition: 0.2s;
-    /* FIX: Lock size and center text vertically */
     height: 85px;
     width: 100%;
     display: flex;
@@ -47,11 +76,12 @@ input {
 .opt-btn.selected { background: var(--neon); color: black; }
 .bracket { color: var(--neon); margin-right: 5px; }
 
-/* AGENT CARD - FIXED PROPORTIONS */
+/* AGENT CARD */
 .agent-card {
     width: 320px; height: 550px; background: #08080c; border: 1px solid #333;
     border-radius: 20px; padding: 25px; position: relative; overflow: hidden;
     display: flex; flex-direction: column; text-align: left;
+    flex-shrink: 0; 
 }
 .card-top { display: flex; justify-content: space-between; font-size: 0.7rem; margin-bottom: 10px; }
 
@@ -86,21 +116,14 @@ input {
     width: 100%; max-width: 320px; background: var(--neon); color: black; border: none; padding: 18px; 
     font-family: 'Orbitron'; font-weight: 900; cursor: pointer; margin-top: 20px;
     clip-path: polygon(5% 0, 100% 0, 100% 80%, 95% 100%, 0 100%, 0 20%);
+    flex-shrink: 0;
 }
 
-/* THE GHOST FIX - NO BACKGROUND POSSIBLE */
 .restart-btn {
     display: inline-block;
     background: none !important;
-    background-color: rgba(0,0,0,0) !important; /* Absolute transparency */
+    background-color: rgba(0,0,0,0) !important; 
     border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    -webkit-appearance: none !important;
-    -moz-appearance: none !important;
-    appearance: none !important;
-    
-    /* Text Styling */
     color: #444 !important;
     font-family: 'Orbitron', sans-serif;
     font-size: 0.7rem;
@@ -111,9 +134,11 @@ input {
     transition: color 0.3s ease;
 }
 
-.restart-btn:hover {
-    color: var(--neon) !important;
-    text-decoration: underline;
+.restart-btn:hover { color: var(--neon) !important; text-decoration: underline; }
+
+/* Scaling for small screens */
+@media (max-width: 360px) {
+    .agent-card { transform: scale(0.9); margin-top: -10px; }
 }
 
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }

@@ -103,10 +103,10 @@ function renderCard(agentKey, id) {
     document.getElementById("card-spec").innerText = data.spec;
 
     const bioTemplates = {
-        "JOKER": "Subject exhibits chaotic trading patterns. High probability of meme-coin leverage and social-driven entry points.",
-        "SINGULARITY": "Subject prioritizes technological fundamentals. Portfolio weighted towards AI infrastructure and compute layers.",
-        "DEFI": "Subject is a yield maximizer. Capital efficiency and staking rewards are primary drivers.",
-        "BASE": "Subject is an ecosystem loyalist. Heavy on-chain footprint within the Base L2 network."
+        "JOKER": `@${userHandle} exhibits chaotic trading patterns. High probability of meme-coin leverage and social-driven entry points.`,
+        "SINGULARITY": `@${userHandle} prioritizes technological fundamentals. Portfolio weighted towards AI infrastructure and compute layers.`,
+        "DEFI": `@${userHandle} is a yield maximizer. Capital efficiency and staking rewards are primary drivers.`,
+        "BASE": `@${userHandle} is an ecosystem loyalist. Heavy on-chain footprint within the Base L2 network.`
     };
     document.getElementById("card-bio").innerText = bioTemplates[agentKey];
 
